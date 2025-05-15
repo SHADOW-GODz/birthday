@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สุขสันต์วันเกิดนะคนดี ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      background: #fff0f6;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      padding: 40px;
+      background: white;
+      border: 8px solid pink;
+      border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+      position: relative;
+      box-shadow: 0 0 30px #ffb6c1;
+      text-align: center;
+      z-index: 1;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      height: 60px;
+    }
+
+    button {
+      font-size: 20px;
+      margin: 0 15px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    #loveBtn {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    #noLoveBtn {
+      background-color: #bbb;
+      color: black;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .slider img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ffb6c1;
+    }
+
+    .floating {
+      width: 120px;
+      margin-top: 30px;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      background-size: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #extraButtons button {
+      margin: 10px;
+      background-color: #ffc0cb;
+      color: white;
+      font-weight: bold;
+    }
+
+    #fullScreenModal,
+    #surpriseModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    #fullScreenModal.hidden,
+    #surpriseModal.hidden {
+      display: none;
+    }
+
+    #modalImage {
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+    }
+
+    #surpriseModal {
+      flex-direction: column;
+      text-align: center;
+      font-size: 24px;
+      color: #d6336c;
+      font-family: 'Kanit', sans-serif;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #surpriseModal > div {
+      animation: pop 0.6s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>สุขสันต์วันเกิดนะที่รัก 🎉</h1>
+    <p>รักเค้ามั้ยน้าาา 😚</p>
+
+    <div class="buttons">
+      <button id="loveBtn">รัก 💖</button>
+      <button id="noLoveBtn">ไม่รัก 😢</button>
+    </div>
+
+    <div id="result" class="hidden">
+      <audio id="bgMusic" autoplay loop>
+        <source src="ไม่ธรรมดา.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+
+      <!-- <div class="slider">
+        <img id="slideImage" src="https://placekitten.com/300/200" alt="ภาพน่ารัก">
+      </div> -->
+
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" class="floating" alt="หัวใจลอย">
+
+      <div class="buttons hidden" id="extraButtons">
+        <button onclick="showHeartFullScreen()">กด 1 💗</button>
+        <button onclick="showCuteImage()"> กด 2🥰</button>
+        <button onclick="showSpecialSurprise()">เซอร์ไพรส์พิเศษ 🎁</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal เต็มจอ -->
+  <div id="fullScreenModal" class="hidden">
+    <img id="modalImage" src="">
+  </div>
+
+  <!-- เซอร์ไพรส์ Modal -->
+  <div id="surpriseModal" class="hidden">
+    <div>
+      🎉 เซอร์ไพรส์! 🎉<br><br>
+      เค้ารักเธอที่สุดเลยน้าาา 💕<br><br>
+      ขอให้มีความสุขมาก ๆ ทุกวันเลยนะ 🎂<br><br>
+      <button onclick="closeSurprise()" style="
+        padding: 10px 20px;
+        font-size: 20px;
+        background-color: #ff69b4;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      ">ปิดนะคะ ❤️</button>
+    </div>
+  </div>
+
+  <script>
+    const loveBtn = document.getElementById('loveBtn');
+    const noLoveBtn = document.getElementById('noLoveBtn');
+    const result = document.getElementById('result');
+    const slideImage = document.getElementById('slideImage');
+
+    const slides = [
+      "https://placekitten.com/300/200",
+      "https://placekitten.com/301/200",
+      "https://placekitten.com/302/200"
+    ];
+    let slideIndex = 0;
+
+    loveBtn.onclick = () => {
+      result.classList.remove('hidden');
+      document.getElementById('bgMusic').play();
+      document.getElementById('extraButtons').classList.remove('hidden');
+      startSlideShow();
+    };
+
+    function startSlideShow() {
+      setInterval(() => {
+        slideIndex = (slideIndex + 1) % slides.length;
+        slideImage.src = slides[slideIndex];
+      }, 2000);
+    }
+
+    const NUM_HEARTS = 5;
+    const hearts = [];
+
+    for (let i = 0; i < NUM_HEARTS; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * window.innerWidth}px`;
+      heart.style.top = `${Math.random() * window.innerHeight}px`;
+      document.body.appendChild(heart);
+
+      hearts.push({
+        el: heart,
+        x: parseFloat(heart.style.left),
+        y: parseFloat(heart.style.top),
+        dx: (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1),
+        dy: (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1),
+      });
+    }
+
+    function moveHearts() {
+      for (let heart of hearts) {
+        heart.x += heart.dx;
+        heart.y += heart.dy;
+        if (heart.x <= 0 || heart.x + 90 >= window.innerWidth) heart.dx *= -1;
+        if (heart.y <= 0 || heart.y + 90 >= window.innerHeight) heart.dy *= -1;
+        heart.el.style.left = `${heart.x}px`;
+        heart.el.style.top = `${heart.y}px`;
+      }
+      requestAnimationFrame(moveHearts);
+    }
+    moveHearts();
+noLoveBtn.addEventListener('mouseenter', () => {
+  const maxX = window.innerWidth - noLoveBtn.offsetWidth;
+  const maxY = window.innerHeight - noLoveBtn.offsetHeight;
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+  noLoveBtn.style.position = 'fixed';
+  noLoveBtn.style.transition = 'top 0.1s ease, left 0.1s ease';
+  noLoveBtn.style.left = `${randomX}px`;
+  noLoveBtn.style.top = `${randomY}px`;
+});
+
+
+    function showHeartFullScreen() {
+      const modal = document.getElementById('fullScreenModal');
+      const img = document.getElementById('modalImage');
+      img.src = "https://scontent.fbkk35-1.fna.fbcdn.net/v/t1.6435-9/33748815_1325037447640500_8403938129848827904_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3BHoXg40buwQ7kNvwEkTTSc&_nc_oc=AdnzQGPXM9n7AYiGKrVUczeXuMhbwOsoNkRIjb9LkhRWmuJwZYQLt7KxD9WFB0QFY5yaz9yGUAqrV1S6xBRoSQLQ&_nc_zt=23&_nc_ht=scontent.fbkk35-1.fna&_nc_gid=ZS06dm0RD1GqCjN-QiEvOA&oh=00_AfItPXGNxbN5MPizqpUIICPnGHJImNaOZ82RPOeNqf064g&oe=684D7416";
+      modal.classList.remove('hidden');
+    }
+
+    function showCuteImage() {
+      const modal = document.getElementById('fullScreenModal');
+      const img = document.getElementById('modalImage');
+      img.src = "https://scontent.fbkk35-1.fna.fbcdn.net/v/t1.6435-9/73320236_1883436965133876_914917785979584512_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=2-F1lJNnI9QQ7kNvwFQWw1s&_nc_oc=AdlJ8Z51Nt6z_12EvqffU0-rKvDLDAQLfnMwbMVM07ErGvgcx0Pa5SrHa58QBo2n-FDAX8Gvi1-DpGxBq6VYBHui&_nc_zt=23&_nc_ht=scontent.fbkk35-1.fna&_nc_gid=WN_Zsd6aeDgfaGTasP8gaQ&oh=00_AfJ-4la8Janaplrwo7hBHyn6Zr5coucBlyFOwsJ-UdAm2Q&oe=684D6514";
+      modal.classList.remove('hidden');
+    }
+
+    function showSpecialSurprise() {
+      document.getElementById('surpriseModal').classList.remove('hidden');
+    }
+
+    function closeSurprise() {
+      document.getElementById('surpriseModal').classList.add('hidden');
+    }
+
+    document.getElementById('fullScreenModal').addEventListener('click', () => {
+      document.getElementById('fullScreenModal').classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
